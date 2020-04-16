@@ -6,5 +6,6 @@
 		<h1>Modificari</h1>
 		<button value = "Afiseaza categorii"></button>
 		<h3>Reprezentam Cluj-Napoca</h3>
+		<h4>titlu</h4>
 	</body>
 </html>
