@@ -3,6 +3,12 @@
 		<title>Reprezentanta auto</title>
 	</head>
 	<body>
-		<button value = "Afiseaza categorii">
+		<input type = "button" value = "Afiseaza categorii">
+		<div>
+			<div id = "zonaA" style = "border: 1px border-color:black">
+			</div>
+			<div id = "zonaB" style = "border: 1px border-color:black">
+			</div>
+		</div>
 	</body>
 </html>
