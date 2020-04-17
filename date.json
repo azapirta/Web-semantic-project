@@ -7,12 +7,12 @@
     ],
     "models": [
         {"id": 1, "denumire": "Golf 7", "dataFabricatie": "01/05/2014", "pret": 8900, "inmatriculat": true, "imagine": "imagini/golf7.jpg", "brandId": 2},
-        {"id": 2, "denumire": "A3", "anFabricatie": "20/03/2019", "pret": 22480, "inmatriculat": true, "imagine": "imagini/a3.jpg", "brandId": 4},
-        {"id": 3, "denumire": "A6", "anFabricatie": "30/05/2019", "pret": 52300, "inmatriculat": false, "imagine": "imagini/a6.jpg", "brandId": 4},
-        {"id": 4, "denumire": "C63 AMG", "anFabricatie": "05/07/2009", "pret": 28900, "inmatriculat": true, "imagine": "imagini/c63amg.jpg", "brandId": 1},
-        {"id": 5, "denumire": "Roadster SLK 250", "anFabricatie": "15/04/2013", "pret": 12790, "inmatriculat": true, "imagine": "imagini/slk250.jpg", "brandId": 1},
-        {"id": 6, "denumire": "Polo Comfortline", "anFabricatie": "01/01/2016", "pret": 11900, "inmatriculat": false, "imagine": "imagini/polo.jpg", "brandId": 2},
-        {"id": 7, "denumire": "Fabia Combi", "anFabricatie": "01/01/2018", "pret": 9490, "inmatriculat": false, "imagine": "imagini/fabia_combi.jpg", "brandId": 3},
-        {"id": 8, "denumire": "Octavia", "anFabricatie": "10/03/2019", "pret": 20000, "inmatriculat": true, "imagine": "imagini/octavia.jpg", "brandId": 3}
+        {"id": 2, "denumire": "A3", "dataFabricatie": "20/03/2019", "pret": 22480, "inmatriculat": true, "imagine": "imagini/a3.jpg", "brandId": 4},
+        {"id": 3, "denumire": "A6", "dataFabricatie": "30/05/2019", "pret": 52300, "inmatriculat": false, "imagine": "imagini/a6.jpg", "brandId": 4},
+        {"id": 4, "denumire": "C63 AMG", "dataFabricatie": "05/07/2009", "pret": 28900, "inmatriculat": true, "imagine": "imagini/c63amg.jpg", "brandId": 1},
+        {"id": 5, "denumire": "Roadster SLK 250", "dataFabricatie": "15/04/2013", "pret": 12790, "inmatriculat": true, "imagine": "imagini/slk250.jpg", "brandId": 1},
+        {"id": 6, "denumire": "Polo Comfortline", "dataFabricatie": "01/01/2016", "pret": 11900, "inmatriculat": false, "imagine": "imagini/polo.jpg", "brandId": 2},
+        {"id": 7, "denumire": "Fabia Combi", "dataFabricatie": "01/01/2018", "pret": 9490, "inmatriculat": false, "imagine": "imagini/fabia_combi.jpg", "brandId": 3},
+        {"id": 8, "denumire": "Octavia", "dataFabricatie": "10/03/2019", "pret": 20000, "inmatriculat": true, "imagine": "imagini/octavia.jpg", "brandId": 3}
     ]
 }

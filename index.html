@@ -61,11 +61,84 @@
                     textNodMarca = document.createTextNode(marca.denumire)
                     nodMarca.appendChild(textNodMarca)
                     document.getElementById("marci").appendChild(nodMarca)
-                    nodMarca.addEventListener("click", function(){
-                        alert("Marca selectata " + marca.id)
+                    nodMarca.addEventListener("click", function () {
+                        ok = document.getElementById("row-box");
+                        if (ok)
+                            document.getElementById("row-box").remove();
+                        solicitare_modele(marca.id)
                     });
                 })
             })
+        }
+
+        function solicitare_modele(idMarca) {
+            _urlModele = "http://localhost:4000/brands/" + idMarca + "?_embed=models"
+            $.getJSON(_urlModele, function (raspuns) {
+                modele = raspuns.models;
+                modele.forEach(model => {
+                    rowDiv = document.createElement("div")
+                    rowDiv.id = "row-box"
+                    rowDiv.className = "row"
+                    document.getElementById("modele").appendChild(rowDiv)
+
+                    marcaDiv = document.createElement("div")
+                    marcaDiv.id = "denumire-model"
+                    marcaDiv.classList.add("marca", "col-3")
+                    document.getElementById("row-box").appendChild(marcaDiv)
+
+                    nodDenumire = document.createElement("h3")
+                    textNodDenumire = document.createTextNode(model.denumire)
+                    nodDenumire.appendChild(textNodDenumire)
+                    document.getElementById("denumire-model").appendChild(nodDenumire)
+
+                    btnStergeModel = document.createElement("button")
+                    btnStergeModel.innerHTML = "Sterge"
+                    btnStergeModel.classList.add("btn", "btn-danger")
+                    document.getElementById("denumire-model").appendChild(btnStergeModel)
+                    btnStergeModel.addEventListener("click", function () {
+                        sterge_model(model.id)  
+                    });
+
+                    imgDiv = document.createElement("div")
+                    imgDiv.id = "imagine-model"
+                    imgDiv.className = "col-3"
+                    document.getElementById("row-box").appendChild(imgDiv)
+
+                    nodImagine = document.createElement("img")
+                    nodImagine.src = model.imagine
+                    nodImagine.width = 200
+                    nodImagine.height = 200
+                    document.getElementById("imagine-model").appendChild(nodImagine)
+
+                    detaliiDiv = document.createElement("div")
+                    detaliiDiv.id = "detalii-model"
+                    detaliiDiv.className = "col-5"
+                    detaliiDiv.style.cssText = 'border-style: solid; text-align: center'
+                    document.getElementById("row-box").appendChild(detaliiDiv)
+
+                    nodDataFabricatie = document.createElement("h3")
+                    textDataFabricatie = document.createTextNode("Data fabricatie: " + model.dataFabricatie)
+                    nodDataFabricatie.appendChild(textDataFabricatie)
+                    document.getElementById("detalii-model").appendChild(nodDataFabricatie)
+
+                    nodPret = document.createElement("h3")
+                    textPret = document.createTextNode("Pret: " + model.pret + "Eur")
+                    nodPret.appendChild(textPret)
+                    document.getElementById("detalii-model").appendChild(nodPret)
+
+                    nodInmatriculat = document.createElement("h3")
+                    if (model.inmatriculat) 
+                        textInmatriculat = document.createTextNode("Masina inmatriculata") 
+                    else 
+                        textInmatriculat = document.createTextNode("Masina neinmatriculata") 
+                    nodInmatriculat.appendChild(textInmatriculat)
+                    document.getElementById("detalii-model").appendChild(nodInmatriculat)
+                });
+            })
+        }
+
+        function sterge_model(idModel) {
+            alert(idModel)
         }
     </script>
 </head>
@@ -83,62 +156,9 @@
                 </ul>
             </div>
             <!--Coloana zona B + detalii model-->
-            <div style="border-style: solid; border-color: rgb(27, 86, 175); width: 70%; height: auto; padding: 1%">
+            <div id="modele"
+                style="border-style: solid; border-color: rgb(27, 86, 175); width: 70%; height: auto; padding: 1%">
                 <h3 class="zona">Detalii autoturisme</h3>
-                <!--Linie primul model-->
-                <div class="row">
-                    <!--Coloana cu denumire + buton stergere-->
-                    <div class="marca col-3">
-                        <h3>Marca</h3>
-                        <button type="button" class="btn btn-danger">Sterge</button>
-                    </div>
-                    <!--Coloana imagine-->
-                    <div class="col-2" style="border-style: solid">
-                        <img src="images.jfif" alt="img" height="100%" width="100%">
-                    </div>
-                    <!--Coloana detalii model-->
-                    <div class="col-5" style="border-style: solid; text-align: center">
-                        <h5><b>Model</b></h5>
-                        <h6>Data fabricatie</h6>
-                        <h6>Pret</h6>
-                    </div>
-                </div>
-                <!--Linie al doilea model-->
-                <div class="row">
-                    <!--Coloana cu denumire + buton stergere-->
-                    <div class="marca col-3">
-                        <h3>Marca</h3>
-                        <button type="button" class="btn btn-danger">Sterge</button>
-                    </div>
-                    <!--Coloana imagine-->
-                    <div class="col-2" style="border-style: solid">
-                        <img src="images.jfif" alt="img" height="100%" width="100%">
-                    </div>
-                    <!--Coloana detalii model-->
-                    <div class="col-5" style="border-style: solid; text-align: center">
-                        <h5><b>Model</b></h5>
-                        <h6>Data fabricatie</h6>
-                        <h6>Pret</h6>
-                    </div>
-                </div>
-                <!--Coloana cu al treilea model-->
-                <div class="row">
-                    <!--Coloana cu denumire + buton stergere-->
-                    <div class="marca col-3">
-                        <h3>Marca</h3>
-                        <button type="button" class="btn btn-danger">Sterge</button>
-                    </div>
-                    <!--Coloana imagine-->
-                    <div class="col-2" style="border-style: solid">
-                        <img src="images.jfif" alt="img" height="100%" width="100%">
-                    </div>
-                    <!--Coloana detalii model-->
-                    <div class="col-5" style="border-style: solid; text-align: center">
-                        <h5><b>Model</b></h5>
-                        <h6>Data fabricatie</h6>
-                        <h6>Pret</h6>
-                    </div>
-                </div>
             </div>
         </div>
         <br />
