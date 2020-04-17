@@ -54,21 +54,25 @@
     <script>
         function solicitare_marci() {
             _urlMarci = "http://localhost:4000/brands?callback=?"
-            $.getJSON(_urlMarci, function (raspuns) {
-                $.each(raspuns, function (indice, marca) {
-                    nodMarca = document.createElement("li")
-                    nodMarca.classList.add("categorie")
-                    textNodMarca = document.createTextNode(marca.denumire)
-                    nodMarca.appendChild(textNodMarca)
-                    document.getElementById("marci").appendChild(nodMarca)
-                    nodMarca.addEventListener("click", function () {
-                        ok = document.getElementById("row-box");
-                        if (ok)
-                            document.getElementById("row-box").remove();
-                        solicitare_modele(marca.id)
-                    });
+            ok_marci = document.getElementsByClassName("categorie")
+            if (!ok_marci[0]) {
+                $.getJSON(_urlMarci, function (raspuns) {
+                    $.each(raspuns, function (indice, marca) {
+                        nodMarca = document.createElement("li")
+                        nodMarca.classList.add("categorie")
+                        textNodMarca = document.createTextNode(marca.denumire)
+                        nodMarca.appendChild(textNodMarca)
+                        // nodMarca.innerHTML = marca.denumire
+                        document.getElementById("marci").appendChild(nodMarca)
+                        nodMarca.addEventListener("click", function () {
+                            ok = document.getElementById("row-box");
+                            if (ok)
+                                document.getElementById("row-box").remove();
+                            solicitare_modele(marca.id)
+                        });
+                    })
                 })
-            })
+            }
         }
 
         function solicitare_modele(idMarca) {
@@ -81,10 +85,10 @@
                     rowDiv.className = "row"
                     document.getElementById("modele").appendChild(rowDiv)
 
-                    marcaDiv = document.createElement("div")
-                    marcaDiv.id = "denumire-model"
-                    marcaDiv.classList.add("marca", "col-3")
-                    document.getElementById("row-box").appendChild(marcaDiv)
+                    modelDiv = document.createElement("div")
+                    modelDiv.id = "denumire-model"
+                    modelDiv.classList.add("marca", "col-3")
+                    document.getElementById("row-box").appendChild(modelDiv)
 
                     nodDenumire = document.createElement("h3")
                     textNodDenumire = document.createTextNode(model.denumire)
@@ -96,12 +100,13 @@
                     btnStergeModel.classList.add("btn", "btn-danger")
                     document.getElementById("denumire-model").appendChild(btnStergeModel)
                     btnStergeModel.addEventListener("click", function () {
-                        sterge_model(model.id)  
+                        sterge_model(idMarca, model.id)
                     });
 
                     imgDiv = document.createElement("div")
                     imgDiv.id = "imagine-model"
                     imgDiv.className = "col-3"
+                    imgDiv.style.cssText = 'border-style: solid'
                     document.getElementById("row-box").appendChild(imgDiv)
 
                     nodImagine = document.createElement("img")
@@ -127,18 +132,26 @@
                     document.getElementById("detalii-model").appendChild(nodPret)
 
                     nodInmatriculat = document.createElement("h3")
-                    if (model.inmatriculat) 
-                        textInmatriculat = document.createTextNode("Masina inmatriculata") 
-                    else 
-                        textInmatriculat = document.createTextNode("Masina neinmatriculata") 
+                    if (model.inmatriculat)
+                        textInmatriculat = document.createTextNode("Masina inmatriculata")
+                    else
+                        textInmatriculat = document.createTextNode("Masina neinmatriculata")
                     nodInmatriculat.appendChild(textInmatriculat)
                     document.getElementById("detalii-model").appendChild(nodInmatriculat)
                 });
             })
         }
 
-        function sterge_model(idModel) {
-            alert(idModel)
+        function sterge_model(idMarca, idModel) {
+            _urlStergereModel = "http://localhost:4000/models/" + idModel;
+            $.ajax({
+                url: _urlStergereModel,
+                type: 'DELETE',
+                success: function (result) {
+                    document.getElementById("row-box").remove();
+                    solicitare_modele(idMarca)
+                }
+            })
         }
     </script>
 </head>
