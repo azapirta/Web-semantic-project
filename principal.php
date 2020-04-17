@@ -26,28 +26,43 @@
 			border-radius: 5%;
 			background-color: rgb(230, 220, 220);
 		}
+		.categorie{
+			border-style: outset;
+			background-color: #66d9ff;
+			text-align: center;
+			font-size: 20px;
+			font-weight: bold;
+			list-style-type: none;
+			height: 20%;
+			padding: 5%;
+		}
+		li.categorie:hover{
+			color: #00001a;
+			background-color: #99ebff;
+			font-size: 25px;
+		}
 		.marca{
 			text-align: center;
 		}
 	</style>
 </head>
 <body style = "width: 100%; font-family: Calibri;">
-	<button type = "button" class = "btn btn-primary">Afiseaza categorii</button>
+	<button type = "button" class = "btn btn-primary">Afiseaza mărci</button>
 	<!--Div principal-->
 	<div style = "width: 100%; padding: 2%">
 		<!--Linie zona A + zona B-->
 		<div class = "row">
 			<!--Coloana zona A + categorii-->
 			<div style = "border-style: solid; border-color: rgb(27, 86, 175); width: 30%; height: auto; padding: 1%">
-				<h3 class = "zona">Zona A</h3>
-				<li>Mercedes</li>
-				<li>Opel</li>
-				<li>Skoda</li>
-				<li>Audi</li>
+				<h3 class = "zona">Mărci autoturisme</h3>
+				<li class = "categorie">Mercedes</li>
+				<li class = "categorie">Opel</li>
+				<li class = "categorie">Skoda</li>
+				<li class = "categorie">Audi</li>
 			</div>
 			<!--Coloana zona B + detalii model-->
 			<div style = "border-style: solid; border-color: rgb(27, 86, 175); width: 70%; height: auto; padding: 1%">
-				<h3 class = "zona">Zona B</h3>
+				<h3 class = "zona">Detalii autoturisme</h3>
 				<!--Linie primul model-->
 				<div class = "row">
 					<!--Coloana cu denumire + buton stergere-->
@@ -109,7 +124,7 @@
 		<div class = "row" style = "border-style: solid; border-color: rgb(27, 86, 175); padding-top: 1%">
 			<!--Zona C-->
 			<div class = "col-2" style = "padding: 1%">
-				<h3 class = "zona">Zona C<h3>
+				<h3 class = "zona">Adaugă autoturism<h3>
 			</div>
 			<!--Formular-->
 			<div class = "col">
