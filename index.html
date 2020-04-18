@@ -153,6 +153,17 @@
                 }
             })
         }
+
+        function adauga_model() {
+            denumire_model = document.getElementById("f_nume_model").value;
+            data_fabricatie = document.getElementById("f_data_fabricatie").value;
+            pret = document.getElementById("f_pret").value;
+            inmatriculat = document.getElementById("f_inmatriculat").value;
+            marca_selectata = document.getElementById("denumire-model")
+            if (marca_selectata == null) {
+                alert("Nicio marca selectata")
+            }
+        }
     </script>
 </head>
 
@@ -184,26 +195,20 @@
             <!--Formular-->
             <div class="col">
                 <form>
-                    <input class="form-input" type="text" placeholder="Denumire model">
-                    <select class="form-input">
-                        <option value="" selected="selected">Marca</option>
-                        <option value="Mercedes">Mercedes</option>
-                        <option value="Opel">Opel</option>
-                        <option value="Skoda">Skoda</option>
-                        <option value="Audi">Audi</option>
+                    <input class="form-input" id="f_nume_model" type="text" placeholder="Denumire model">
+                    <input class="form-input" id="f_data_fabricatie" type="text" placeholder="Data fabricatie">
+                    <input class="form-input" id="f_pret" type="text" placeholder="Pret">
+                    <label>Inmatriculat?</label>
+                    <select id="f_inmatriculat">
+                        <option>Da</option>
+                        <option>Nu</option>
                     </select>
-                    <input class="form-input" type="text" placeholder="Data fabricatie">
-                    <input class="form-input" type="text" placeholder="Pret">
-                    <div class="form-input">
-                        <label>Aer conditionat?</label>
-                        <input type="radio" value="Da">Da</input>
-                        <input type="radio" value="Nu">Nu</input>
-                    </div>
                 </form>
             </div>
             <!--Buton trimitere-->
             <div class="col-1">
-                <button type="button" class="btn btn-primary" style="padding: 7%">Trimite</button>
+                <button type="button" class="btn btn-primary" style="padding: 7%"
+                    onmouseover="adauga_model()">Trimite</button>
             </div>
         </div>
     </div>
