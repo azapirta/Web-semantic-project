@@ -62,12 +62,8 @@
                         nodMarca.classList.add("categorie")
                         textNodMarca = document.createTextNode(marca.denumire)
                         nodMarca.appendChild(textNodMarca)
-                        // nodMarca.innerHTML = marca.denumire
                         document.getElementById("marci").appendChild(nodMarca)
                         nodMarca.addEventListener("click", function () {
-                            ok = document.getElementById("row-box");
-                            if (ok)
-                                document.getElementById("row-box").remove();
                             solicitare_modele(marca.id)
                         });
                     })
@@ -79,63 +75,54 @@
             _urlModele = "http://localhost:4000/brands/" + idMarca + "?_embed=models"
             $.getJSON(_urlModele, function (raspuns) {
                 modele = raspuns.models;
-                modele.forEach(model => {
+                modele.forEach((model, indice) => {
                     rowDiv = document.createElement("div")
-                    rowDiv.id = "row-box"
-                    rowDiv.className = "row"
+                    rowDiv.classList.add("row", "row-box")
                     document.getElementById("modele").appendChild(rowDiv)
-
-                    /* LINIA ASTA
-                    abc = document.createElement("h1")
-                    abc.innerHTML = "TITLU"
-                    document.getElementById("modele").appendChild(abc)
-                    */
 
                     modelDiv = document.createElement("div")
                     modelDiv.id = "denumire-model"
                     modelDiv.classList.add("marca", "col-3")
-                    document.getElementById("row-box").appendChild(modelDiv)
+                    document.getElementsByClassName("row-box")[indice].appendChild(modelDiv)
 
                     nodDenumire = document.createElement("h3")
                     textNodDenumire = document.createTextNode(model.denumire)
                     nodDenumire.appendChild(textNodDenumire)
-                    document.getElementById("denumire-model").appendChild(nodDenumire)
+                    document.getElementsByClassName("marca")[indice].appendChild(nodDenumire)
 
                     btnStergeModel = document.createElement("button")
                     btnStergeModel.innerHTML = "Sterge"
                     btnStergeModel.classList.add("btn", "btn-danger")
-                    document.getElementById("denumire-model").appendChild(btnStergeModel)
+                    document.getElementsByClassName("marca")[indice].appendChild(btnStergeModel)
                     btnStergeModel.addEventListener("click", function () {
                         sterge_model(idMarca, model.id)
                     });
 
                     imgDiv = document.createElement("div")
-                    imgDiv.id = "imagine-model"
-                    imgDiv.className = "col-3"
+                    imgDiv.classList.add("img-div", "col-3")
                     imgDiv.style.cssText = 'border-style: solid'
-                    document.getElementById("row-box").appendChild(imgDiv)
+                    document.getElementsByClassName("row-box")[indice].appendChild(imgDiv)
 
                     nodImagine = document.createElement("img")
                     nodImagine.src = model.imagine
                     nodImagine.width = 200
                     nodImagine.height = 200
-                    document.getElementById("imagine-model").appendChild(nodImagine)
+                    document.getElementsByClassName("img-div")[indice].appendChild(nodImagine)
 
                     detaliiDiv = document.createElement("div")
-                    detaliiDiv.id = "detalii-model"
-                    detaliiDiv.className = "col-5"
+                    detaliiDiv.classList.add("detalii-div", "col-5")
                     detaliiDiv.style.cssText = 'border-style: solid; text-align: center'
-                    document.getElementById("row-box").appendChild(detaliiDiv)
+                    document.getElementsByClassName("row-box")[indice].appendChild(detaliiDiv)
 
                     nodDataFabricatie = document.createElement("h3")
                     textDataFabricatie = document.createTextNode("Data fabricatie: " + model.dataFabricatie)
                     nodDataFabricatie.appendChild(textDataFabricatie)
-                    document.getElementById("detalii-model").appendChild(nodDataFabricatie)
+                    document.getElementsByClassName("detalii-div")[indice].appendChild(nodDataFabricatie)
 
                     nodPret = document.createElement("h3")
                     textPret = document.createTextNode("Pret: " + model.pret + "Eur")
                     nodPret.appendChild(textPret)
-                    document.getElementById("detalii-model").appendChild(nodPret)
+                    document.getElementsByClassName("detalii-div")[indice].appendChild(nodPret)
 
                     nodInmatriculat = document.createElement("h3")
                     if (model.inmatriculat)
@@ -143,7 +130,7 @@
                     else
                         textInmatriculat = document.createTextNode("Masina neinmatriculata")
                     nodInmatriculat.appendChild(textInmatriculat)
-                    document.getElementById("detalii-model").appendChild(nodInmatriculat)
+                    document.getElementsByClassName("detalii-div")[indice].appendChild(nodInmatriculat)
                 });
             })
         }
