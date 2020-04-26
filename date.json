@@ -89,14 +89,6 @@
       "inmatriculat": true,
       "imagine": "imagini/octavia.jpg",
       "brandId": 3
-    },
-    {
-      "denumire": "Passat",
-      "dataFabricatie": "12/10/2005",
-      "pret": "5000",
-      "inmatriculat": true,
-      "brandId": 2,
-      "id": 9
     }
   ]
 }
