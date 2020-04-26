@@ -3,24 +3,17 @@
 <head>
     <title>Reprezentanta auto</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
     <style type="text/css">
         .form-input {
             width: 95%;
         }
-
+        
         .zona {
             text-align: center;
             float: center;
@@ -29,7 +22,7 @@
             border-radius: 5%;
             background-color: rgb(230, 220, 220);
         }
-
+        
         .categorie {
             border-style: outset;
             background-color: #66d9ff;
@@ -40,13 +33,13 @@
             height: 20%;
             padding: 5%;
         }
-
+        
         li.categorie:hover {
             color: #00001a;
             background-color: #99ebff;
             font-size: 25px;
         }
-
+        
         .marca {
             text-align: center;
         }
@@ -58,14 +51,14 @@
             _urlMarci = "http://localhost:4000/brands?callback=?"
             ok_marci = document.getElementsByClassName("categorie")
             if (!ok_marci[0]) {
-                $.getJSON(_urlMarci, function (raspuns) {
-                    $.each(raspuns, function (indice, marca) {
+                $.getJSON(_urlMarci, function(raspuns) {
+                    $.each(raspuns, function(indice, marca) {
                         nodMarca = document.createElement("li")
                         nodMarca.classList.add("categorie")
                         textNodMarca = document.createTextNode(marca.denumire)
                         nodMarca.appendChild(textNodMarca)
                         document.getElementById("marci").appendChild(nodMarca)
-                        nodMarca.addEventListener("click", function () {
+                        nodMarca.addEventListener("click", function() {
                             solicitare_modele(marca.id)
                         })
                     })
@@ -76,66 +69,69 @@
         function solicitare_modele(idMarca) {
             _urlModele = "http://localhost:4000/brands/" + idMarca + "?_embed=models"
             id_marca_selectata = idMarca
-            $.getJSON(_urlModele, function (raspuns) {
-                modele = raspuns.models
-                modele.forEach((model, indice) => {
-                    rowDiv = document.createElement("div")
-                    rowDiv.classList.add("row", "row-box")
-                    document.getElementById("modele").appendChild(rowDiv)
+            ok_modele = document.getElementsByClassName("marca")
+            if (!ok_modele[id_marca_selectata]) {
+                $.getJSON(_urlModele, function(raspuns) {
+                    modele = raspuns.models
+                    modele.forEach((model, indice) => {
+                        rowDiv = document.createElement("div")
+                        rowDiv.classList.add("row", "row-box")
+                        document.getElementById("modele").appendChild(rowDiv)
 
-                    modelDiv = document.createElement("div")
-                    modelDiv.id = "denumire-model"
-                    modelDiv.classList.add("marca", "col-3")
-                    document.getElementsByClassName("row-box")[indice].appendChild(modelDiv)
+                        modelDiv = document.createElement("div")
+                        modelDiv.id = "denumire-model"
+                        modelDiv.classList.add("marca", "col-3")
+                        document.getElementsByClassName("row-box")[indice].appendChild(modelDiv)
 
-                    nodDenumire = document.createElement("h3")
-                    textNodDenumire = document.createTextNode(model.denumire)
-                    nodDenumire.appendChild(textNodDenumire)
-                    document.getElementsByClassName("marca")[indice].appendChild(nodDenumire)
+                        nodDenumire = document.createElement("h3")
+                        textNodDenumire = document.createTextNode(model.denumire)
+                        nodDenumire.appendChild(textNodDenumire)
+                        document.getElementsByClassName("marca")[indice].appendChild(nodDenumire)
 
-                    btnStergeModel = document.createElement("button")
-                    btnStergeModel.innerHTML = "Sterge"
-                    btnStergeModel.classList.add("btn", "btn-danger")
-                    document.getElementsByClassName("marca")[indice].appendChild(btnStergeModel)
-                    btnStergeModel.addEventListener("click", function () {
-                        sterge_model(idMarca, model.id)
-                    })
+                        btnStergeModel = document.createElement("button")
+                        btnStergeModel.innerHTML = "Sterge"
+                        btnStergeModel.classList.add("btn", "btn-danger")
+                        document.getElementsByClassName("marca")[indice].appendChild(btnStergeModel)
+                        btnStergeModel.addEventListener("click", function() {
+                            sterge_model(idMarca, model.id)
+                        })
 
-                    imgDiv = document.createElement("div")
-                    imgDiv.classList.add("img-div", "col-3")
-                    imgDiv.style.cssText = 'border-style: solid'
-                    document.getElementsByClassName("row-box")[indice].appendChild(imgDiv)
+                        imgDiv = document.createElement("div")
+                        imgDiv.classList.add("img-div", "col-3")
+                        imgDiv.style.cssText = 'border-style: solid'
+                        document.getElementsByClassName("row-box")[indice].appendChild(imgDiv)
 
-                    nodImagine = document.createElement("img")
-                    nodImagine.src = model.imagine
-                    nodImagine.width = 200
-                    nodImagine.height = 200
-                    document.getElementsByClassName("img-div")[indice].appendChild(nodImagine)
+                        nodImagine = document.createElement("img")
+                        nodImagine.src = model.imagine
+                        nodImagine.width = 200
+                        nodImagine.height = 200
+                        document.getElementsByClassName("img-div")[indice].appendChild(nodImagine)
 
-                    detaliiDiv = document.createElement("div")
-                    detaliiDiv.classList.add("detalii-div", "col-5")
-                    detaliiDiv.style.cssText = 'border-style: solid; text-align: center'
-                    document.getElementsByClassName("row-box")[indice].appendChild(detaliiDiv)
+                        detaliiDiv = document.createElement("div")
+                        detaliiDiv.classList.add("detalii-div", "col-5")
+                        detaliiDiv.style.cssText = 'border-style: solid; text-align: center'
+                        document.getElementsByClassName("row-box")[indice].appendChild(detaliiDiv)
 
-                    nodDataFabricatie = document.createElement("h3")
-                    textDataFabricatie = document.createTextNode("Data fabricatie: " + model.dataFabricatie)
-                    nodDataFabricatie.appendChild(textDataFabricatie)
-                    document.getElementsByClassName("detalii-div")[indice].appendChild(nodDataFabricatie)
+                        nodDataFabricatie = document.createElement("h3")
+                        textDataFabricatie = document.createTextNode("Data fabricatie: " + model.dataFabricatie)
+                        nodDataFabricatie.appendChild(textDataFabricatie)
+                        document.getElementsByClassName("detalii-div")[indice].appendChild(nodDataFabricatie)
 
-                    nodPret = document.createElement("h3")
-                    textPret = document.createTextNode("Pret: " + model.pret + "Eur")
-                    nodPret.appendChild(textPret)
-                    document.getElementsByClassName("detalii-div")[indice].appendChild(nodPret)
+                        nodPret = document.createElement("h3")
+                        textPret = document.createTextNode("Pret: " + model.pret + "Eur")
+                        nodPret.appendChild(textPret)
+                        document.getElementsByClassName("detalii-div")[indice].appendChild(nodPret)
 
-                    nodInmatriculat = document.createElement("h3")
-                    if (model.inmatriculat)
-                        textInmatriculat = document.createTextNode("Masina inmatriculata")
-                    else
-                        textInmatriculat = document.createTextNode("Masina neinmatriculata")
-                    nodInmatriculat.appendChild(textInmatriculat)
-                    document.getElementsByClassName("detalii-div")[indice].appendChild(nodInmatriculat)
-                });
-            })
+                        nodInmatriculat = document.createElement("h3")
+                        if (model.inmatriculat)
+                            textInmatriculat = document.createTextNode("Masina inmatriculata")
+                        else
+                            textInmatriculat = document.createTextNode("Masina neinmatriculata")
+                        nodInmatriculat.appendChild(textInmatriculat)
+                        document.getElementsByClassName("detalii-div")[indice].appendChild(nodInmatriculat)
+                    });
+                })
+            }
         }
 
         function sterge_model(idMarca, idModel) {
@@ -143,7 +139,7 @@
             $.ajax({
                 url: _urlStergereModel,
                 type: 'DELETE',
-                success: function (result) {
+                success: function(result) {
                     document.getElementById("row-box").remove()
                     solicitare_modele(idMarca)
                 }
@@ -162,14 +158,19 @@
                     inmatriculat = true
                 else
                     inmatriculat = false
-                prop_model = { "denumire": denumire_model, "dataFabricatie": data_fabricatie, "pret": pret, "inmatriculat": inmatriculat, "brandId": id_marca_selectata }
+                prop_model = {
+                    "denumire": denumire_model,
+                    "dataFabricatie": data_fabricatie,
+                    "pret": pret,
+                    "inmatriculat": inmatriculat,
+                    "brandId": id_marca_selectata
+                }
                 configurari = {
                     url: "http://localhost:4000/models",
                     type: "POST",
                     data: JSON.stringify(prop_model),
                     contentType: "application/json",
-                    success:
-                        alert("Masina adaugata cu succes")
+                    success: alert("Masina adaugata cu succes")
                 }
                 $.ajax(configurari)
             }
@@ -190,8 +191,7 @@
                 </ul>
             </div>
             <!--Coloana zona B + detalii model-->
-            <div id="modele"
-                style="border-style: solid; border-color: rgb(27, 86, 175); width: 70%; height: auto; padding: 1%">
+            <div id="modele" style="border-style: solid; border-color: rgb(27, 86, 175); width: 70%; height: auto; padding: 1%">
                 <h3 class="zona">Detalii autoturisme</h3>
             </div>
         </div>
@@ -218,8 +218,7 @@
             </div>
             <!--Buton trimitere-->
             <div class="col-1">
-                <button type="button" class="btn btn-primary" style="padding: 7%"
-                    onmouseover="adauga_model()">Trimite</button>
+                <button type="button" class="btn btn-primary" style="padding: 7%" onmouseover="adauga_model()">Trimite</button>
             </div>
         </div>
     </div>
